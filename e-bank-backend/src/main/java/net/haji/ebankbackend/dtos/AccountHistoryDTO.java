@@ -1,10 +1,12 @@
 package net.haji.ebankbackend.dtos;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@Getter @Setter @Builder @ToString @AllArgsConstructor
+@Getter @Setter @Builder
+@ToString @AllArgsConstructor
 @NoArgsConstructor
 public class AccountHistoryDTO {
     private String accountId;

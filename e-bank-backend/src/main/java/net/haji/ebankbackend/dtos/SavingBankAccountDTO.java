@@ -1,13 +1,14 @@
 package net.haji.ebankbackend.dtos;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import net.haji.ebankbackend.enums.AccountStatus;
 
 import java.util.Date;
 
 @Getter
 @Setter
-@Builder
+@SuperBuilder
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
