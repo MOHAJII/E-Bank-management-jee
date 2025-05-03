@@ -11,7 +11,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SavingBankAccountDTO {
+public class SavingBankAccountDTO extends BankAccountDTO{
     private String id;
     private double balance;
     private Date createdAt;
