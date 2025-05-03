@@ -1,11 +1,8 @@
 package net.haji.ebankbackend.dtos;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter @Setter @Builder @ToString
+@Getter @Setter @Builder @ToString @AllArgsConstructor @NoArgsConstructor
 public class CustomerDTO {
     private Long id;
     private String name;

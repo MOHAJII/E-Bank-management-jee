@@ -1,14 +1,12 @@
 package net.haji.ebankbackend.dtos;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import net.haji.ebankbackend.enums.OperationType;
 
 import java.util.Date;
 
-@Getter @Setter @ToString @Builder
+@Getter @Setter @Builder @ToString @AllArgsConstructor
+@NoArgsConstructor
 public class AccountOperationDTO {
     private Long id;
     private Date operationDate;
