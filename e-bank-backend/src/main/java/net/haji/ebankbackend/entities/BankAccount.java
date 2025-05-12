@@ -21,8 +21,10 @@ public class BankAccount {
     private Date createdAt;
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
+
     @ManyToOne
     private Customer customer;
+
     @OneToMany(mappedBy = "bankAccount")
     private List<AccountOperation> accountOperations;
 }

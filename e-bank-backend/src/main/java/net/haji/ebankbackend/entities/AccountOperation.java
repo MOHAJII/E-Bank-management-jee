@@ -20,7 +20,7 @@ public class AccountOperation {
     private OperationType type;
 
     @ManyToOne
-    private BankAccount bankAccount; //
+    private BankAccount bankAccount;
 
     private String description;
 
