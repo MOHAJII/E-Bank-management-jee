@@ -20,21 +20,11 @@ export class CustomersComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.getCustomers();
+    this.handleSearchCustomers();
     this.searchFormGroup = this.fb.group({
       keyword : this.fb.control("")
     })
   }
-
-  getCustomers() {
-    this.customerService.getCustomers().subscribe(
-      {
-        next : resp => this.customers = resp,
-        error : err => this.errorMessage = err.message
-      }
-    )
-  }
-
 
   handleSearchCustomers() {
     let keyword = this.searchFormGroup?.value.keyword;
@@ -44,5 +34,17 @@ export class CustomersComponent implements OnInit{
         error : err => this.errorMessage = err.message
       }
     )
+  }
+
+  handleDelete(c: Customer) {
+    let confirmation = confirm("are sure to delete customer!");
+    if (confirmation)
+      this.customerService.deleteCustomer(c).subscribe(
+        {
+          next : resp => this.handleSearchCustomers(),
+          error : err => this.errorMessage = err.message
+        }
+      )
+
   }
 }

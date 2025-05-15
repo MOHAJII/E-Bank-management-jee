@@ -29,7 +29,7 @@
                 <td>{{c.name}}</td>
                 <td>{{c.email}}</td>
                 <td>
-                  <button class="btn btn-outline-danger">
+                  <button (click)="handleDelete(c)" class="btn btn-outline-danger">
                     <i class="bi bi-trash2"></i>
                   </button>
                 </td>

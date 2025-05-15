@@ -19,4 +19,8 @@ export class CustomerService {
   searchCustomers(keyword : string) : Observable<Array<Customer>> {
     return this.http.get<Array<Customer>>(this.backendHost+"/customers/search?keyword="+keyword);
   }
+
+  deleteCustomer(c: Customer) {
+    return this.http.delete(this.backendHost+"/customers/"+c.id);
+  }
 }
