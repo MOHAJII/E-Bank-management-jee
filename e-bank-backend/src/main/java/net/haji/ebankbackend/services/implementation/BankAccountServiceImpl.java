@@ -180,4 +180,11 @@ public class BankAccountServiceImpl implements BankAccountService {
         accountHistoryDTO.setCurrentPage(page);
         return accountHistoryDTO;
     }
+
+    @Override
+    public List<CustomerDTO> searchCustomer(String keyword) {
+        List<Customer> customers = customerRepository.findCustomerByNameContains(keyword);
+        List<CustomerDTO> customerDTOS = customers.stream().map(customer -> dtoMapper.fromCustomer(customer)).toList();
+        return customerDTOS;
+    }
 }

@@ -6,26 +6,24 @@ import net.haji.ebankbackend.dtos.AccountOperationDTO;
 import net.haji.ebankbackend.dtos.BankAccountDTO;
 import net.haji.ebankbackend.exceptions.BankAccountNotFoundException;
 import net.haji.ebankbackend.services.BankAccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @AllArgsConstructor
 public class BankAccountRestController {
     private BankAccountService bankAccountService;
 
-    @GetMapping("/accounts/{accountId}")
-    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
-        return bankAccountService.getBankAccount(accountId);
-    }
-
     @GetMapping("/accounts")
     public List<BankAccountDTO> lisBankAccounts() {
         return bankAccountService.bankAccountList();
+    }
+
+    @GetMapping("/accounts/{accountId}")
+    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
+        return bankAccountService.getBankAccount(accountId);
     }
 
     @GetMapping("/accounts/{accountId}/operations")
