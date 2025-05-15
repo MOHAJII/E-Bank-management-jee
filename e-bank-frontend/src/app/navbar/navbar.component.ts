@@ -11,14 +11,6 @@ import {CustomerService} from '../services/customer.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent {
 
-  customers! : Array<Customer>;
-
-  constructor(private customerService : CustomerService) {
-  }
-
-  ngOnInit(): void {
-      throw new Error('Method not implemented.');
-  }
 }
