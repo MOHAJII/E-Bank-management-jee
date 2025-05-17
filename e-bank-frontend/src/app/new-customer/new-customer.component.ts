@@ -29,7 +29,7 @@ export class NewCustomerComponent implements OnInit{
   }
 
 
- handleSubmit() {
+ handleAddCustomer() {
     let customer = this.newCustomerGroupForm.value;
     this.customerService.addCustomer(customer).subscribe({
       next: resp => {

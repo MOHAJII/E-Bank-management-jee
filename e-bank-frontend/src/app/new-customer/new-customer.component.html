@@ -4,7 +4,7 @@
       <h3>New customers</h3>
     </div>
     <div class="card-body">
-      <form [formGroup]="newCustomerGroupForm" (submit)="handleSubmit()">
+      <form [formGroup]="newCustomerGroupForm" (submit)="handleAddCustomer()">
         <div class="mb-2">
           <label class="form-label">Name : </label>
           <input type="text" class="form-control" formControlName="name">

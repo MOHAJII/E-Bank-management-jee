@@ -24,7 +24,7 @@ export class CustomerService {
     return this.http.delete(this.backendHost+"/customers/"+c.id);
   }
 
-  addCustomer(c : Customer) {
-    return this.http.post(this.backendHost+"/customers", c);
+  addCustomer(c : Customer) : Observable<Customer> {
+    return this.http.post<Customer>(this.backendHost+"/customers", c);
   }
 }
