@@ -52,8 +52,15 @@
         }
       </div>
     </div>
+    <ul class="nav nav-pills mt-3">
+      <li *ngFor="let item of [].constructor(accountDetails.totalPages); let page=index" class="ms-1">
+        <a [ngClass]="page == currentPage ? 'btn-info text-black' : 'btn-outline-info' " (click) = "goToPage(page)" class="btn btn-outline-info">{{page + 1}}</a>
+      </li>
+    </ul>
   </div>
+
   <div class="col col-6">
+
 
   </div>
 </div>

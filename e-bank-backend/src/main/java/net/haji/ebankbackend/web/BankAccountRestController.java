@@ -1,9 +1,8 @@
 package net.haji.ebankbackend.web;
 
 import lombok.AllArgsConstructor;
-import net.haji.ebankbackend.dtos.AccountHistoryDTO;
-import net.haji.ebankbackend.dtos.AccountOperationDTO;
-import net.haji.ebankbackend.dtos.BankAccountDTO;
+import net.haji.ebankbackend.dtos.*;
+import net.haji.ebankbackend.exceptions.BalanceNotSufficientException;
 import net.haji.ebankbackend.exceptions.BankAccountNotFoundException;
 import net.haji.ebankbackend.services.BankAccountService;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +31,22 @@ public class BankAccountRestController {
             @RequestParam(name = "page", defaultValue = "0") int page,
             @RequestParam(name = "size", defaultValue = "5") int size) throws BankAccountNotFoundException {
         return bankAccountService.getAccountHistory(accountId, page, size);
+    }
+
+    @PostMapping("/accounts/debit")
+    public DebitDTO debit(@RequestParam DebitDTO debitDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
+        bankAccountService.debit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
+        return debitDTO;
+    }
+
+    @PostMapping("/accounts/credit")
+    public DebitDTO credit(@RequestParam DebitDTO debitDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
+        bankAccountService.credit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
+        return debitDTO;
+    }
+
+    @PostMapping("/accounts /transfer")
+    public void transfer(@RequestParam TransferRequestDTO transferRequestDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
+        bankAccountService.transfer(transferRequestDTO.getAccountIdSource(), transferRequestDTO.getAccountIdDestination(), transferRequestDTO.getAmount());
     }
 }

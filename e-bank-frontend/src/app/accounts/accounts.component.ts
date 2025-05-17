@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AccountsService} from '../services/accounts.service';
 import {AccountDetails} from '../models/account.model';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {AsyncPipe, DatePipe, DecimalPipe} from '@angular/common';
+import {AsyncPipe, DatePipe, DecimalPipe, NgClass, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-accounts',
@@ -12,7 +12,9 @@ import {AsyncPipe, DatePipe, DecimalPipe} from '@angular/common';
     MatSnackBarModule,
     AsyncPipe,
     DatePipe,
-    DecimalPipe
+    DecimalPipe,
+    NgForOf,
+    NgClass
   ],
   templateUrl: './accounts.component.html',
   standalone: true,
@@ -48,5 +50,10 @@ export class AccountsComponent implements OnInit{
           })
         }
       })
+  }
+
+  goToPage(page: number) {
+    this.currentPage = page;
+    this.handleSearch();
   }
 }
