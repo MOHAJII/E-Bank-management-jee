@@ -3,18 +3,18 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AccountsService} from '../services/accounts.service';
 import {AccountDetails} from '../models/account.model';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {AsyncPipe, DatePipe, DecimalPipe, NgClass, NgForOf} from '@angular/common';
+import {AsyncPipe, DatePipe, DecimalPipe, JsonPipe, NgClass, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-accounts',
   imports: [
     ReactiveFormsModule,
     MatSnackBarModule,
-    AsyncPipe,
     DatePipe,
     DecimalPipe,
     NgForOf,
-    NgClass
+    NgClass,
+    JsonPipe
   ],
   templateUrl: './accounts.component.html',
   standalone: true,
@@ -26,6 +26,7 @@ export class AccountsComponent implements OnInit{
     currentPage : number = 0;
     pageSize : number = 5;
     accountDetails! : AccountDetails;
+    operationFormGroup! : FormGroup;
 
     constructor(private accountsService : AccountsService, private fb : FormBuilder, private snackBar : MatSnackBar) {
     }
@@ -33,6 +34,13 @@ export class AccountsComponent implements OnInit{
     ngOnInit(): void {
       this.accountsFormGroup = this.fb.group({
         accountId : this.fb.control("", [Validators.required])
+      });
+
+      this.operationFormGroup = this.fb.group({
+        operationType : this.fb.control("", [Validators.required]),
+        accountDestination : this.fb.control(null, [Validators.required]),
+        amount : this.fb.control("", [Validators.required]),
+        description : this.fb.control("", [Validators.required]),
       })
     }
 
@@ -55,5 +63,17 @@ export class AccountsComponent implements OnInit{
   goToPage(page: number) {
     this.currentPage = page;
     this.handleSearch();
+  }
+
+  handleOperation() {
+    let accountId : string = this.accountsFormGroup.value.accountId;
+    let accountDestination : string = this.operationFormGroup.value.accountDestination;
+    let operationType : string = this.operationFormGroup.value.operationType;
+    let amount : number = this.operationFormGroup.value.amount;
+    let description : string = this.operationFormGroup.value.description;
+
+    if (operationType == 'DEBIT') {
+      this.accountsService.debit(accountId, amount, description);
+    }
   }
 }
