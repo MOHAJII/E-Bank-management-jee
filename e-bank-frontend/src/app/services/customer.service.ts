@@ -23,4 +23,8 @@ export class CustomerService {
   deleteCustomer(c: Customer) {
     return this.http.delete(this.backendHost+"/customers/"+c.id);
   }
+
+  addCustomer(c : Customer) {
+    return this.http.post(this.backendHost+"/customers", c);
+  }
 }

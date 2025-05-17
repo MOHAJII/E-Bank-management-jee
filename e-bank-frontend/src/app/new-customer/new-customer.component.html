@@ -1,1 +1,23 @@
-<p>new-customer works!</p>
+<div class="container col-md-6 offset-3">
+  <div class="card">
+    <div class="card-header bg-info-subtle p-3">
+      <h3>New customers</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="newCustomerGroupForm" (submit)="handleSubmit()">
+        <div class="mb-2">
+          <label class="form-label">Name : </label>
+          <input type="text" class="form-control" formControlName="name">
+        </div>
+        <div class="mb-4">
+          <label class="form-label">Email : </label>
+          <input type="text" class="form-control" formControlName="email">
+        </div>
+        <button [disabled]="!newCustomerGroupForm.valid" class="btn btn-outline-info mx-auto" type="submit">
+          Save
+          <i class="bi bi-save"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

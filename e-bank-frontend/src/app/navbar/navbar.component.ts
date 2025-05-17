@@ -1,7 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink} from '@angular/router';
-import {Customer} from '../models/customer.model';
-import {CustomerService} from '../services/customer.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +7,7 @@ import {CustomerService} from '../services/customer.service';
     RouterLink
   ],
   templateUrl: './navbar.component.html',
+  standalone: true,
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {

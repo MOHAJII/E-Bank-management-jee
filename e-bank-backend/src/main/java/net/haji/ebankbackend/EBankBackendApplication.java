@@ -4,6 +4,7 @@ import net.haji.ebankbackend.dtos.BankAccountDTO;
 import net.haji.ebankbackend.dtos.CurrentBankAccountDTO;
 import net.haji.ebankbackend.dtos.CustomerDTO;
 import net.haji.ebankbackend.dtos.SavingBankAccountDTO;
+import net.haji.ebankbackend.entities.Customer;
 import net.haji.ebankbackend.exceptions.CustomerNotFoundException;
 import net.haji.ebankbackend.services.BankAccountService;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +21,7 @@ public class EBankBackendApplication {
         SpringApplication.run(EBankBackendApplication.class, args);
     }
 
-    //@Bean
+    @Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
         return args -> {
             Stream.of("Mohammed", "Ahmed", "Omar").forEach(name -> {
