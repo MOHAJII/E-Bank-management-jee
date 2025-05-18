@@ -14,7 +14,6 @@ import {AsyncPipe, DatePipe, DecimalPipe, JsonPipe, NgClass, NgForOf} from '@ang
     DecimalPipe,
     NgForOf,
     NgClass,
-    JsonPipe
   ],
   templateUrl: './accounts.component.html',
   standalone: true,
@@ -38,7 +37,7 @@ export class AccountsComponent implements OnInit{
 
       this.operationFormGroup = this.fb.group({
         operationType : this.fb.control("", [Validators.required]),
-        accountDestination : this.fb.control(null, [Validators.required]),
+        accountDestination : this.fb.control(null, [Validators.minLength(8)]),
         amount : this.fb.control("", [Validators.required]),
         description : this.fb.control("", [Validators.required]),
       })
@@ -73,7 +72,47 @@ export class AccountsComponent implements OnInit{
     let description : string = this.operationFormGroup.value.description;
 
     if (operationType == 'DEBIT') {
-      this.accountsService.debit(accountId, amount, description);
+      this.accountsService.debit(accountId, amount, description).subscribe({
+        next : value => {
+          this.handleSearch();
+          this.snackBar.open(`Debit success!`, "close", {
+            duration : 5000, panelClass : "snackbar-success"
+          })
+        },
+        error : err => {
+          this.snackBar.open(`Error : ${err.message}`, "close", {
+            duration : 5000, panelClass : "snackbar-error"
+          })
+        }
+      });
+    } else  if (operationType == 'CREDIT') {
+      this.accountsService.credit(accountId, amount, description).subscribe({
+        next : value => {
+          this.handleSearch();
+          this.snackBar.open(`Credit success!`, "close", {
+            duration : 5000, panelClass : "snackbar-success"
+          })
+        },
+        error : err => {
+          this.snackBar.open(`Error : ${err.message}`, "close", {
+            duration : 5000, panelClass : "snackbar-error"
+          })
+        }
+      });
+    } else  if (operationType == 'TRANSFER') {
+      this.accountsService.transfer(accountId, accountDestination, amount, description).subscribe({
+        next : value => {
+          this.handleSearch();
+          this.snackBar.open(`Transfer success!`, "close", {
+            duration : 5000, panelClass : "snackbar-success"
+          })
+        },
+        error : err => {
+          this.snackBar.open(`Error : ${err.message}`, "close", {
+            duration : 5000, panelClass : "snackbar-error"
+          })
+        }
+      });
     }
   }
 }

@@ -28,7 +28,7 @@ export class AccountsService {
   }
 
   transfer(accountIdSource : string, accountIdDestination : string,  amount : number, description : string) {
-    let transferOp = {accountIdSource, accountIdDestination, amount, description};
+    let transferOp = {accountIdSource, accountIdDestination, amount};
     return this.http.post(this.backendHost+"/accounts/transfer", transferOp);
   }
 }
