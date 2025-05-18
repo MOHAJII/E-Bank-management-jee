@@ -1,0 +1,44 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header text-center">
+          <h4>Login</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginFormGroup" (submit)="handleLogin()">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                name="username"
+                formControlName="username"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                name="password"
+                formControlName="password"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="!loginFormGroup.valid"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
