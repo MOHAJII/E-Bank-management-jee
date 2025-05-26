@@ -8,27 +8,29 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink = "/">Home</a>
+            <a class="nav-link active" aria-current="page" routerLink = "/admin/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" routerLink = "/admin/accounts">Accounts</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Customers
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink = "/customers">Search</a></li>
-              <li><a class="dropdown-item" href="/new-customer">New</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Accounts
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" routerLink = "/accounts">Search</a></li>
-              <li><a class="dropdown-item" href="#">New</a></li>
+              <li><a class="dropdown-item" routerLink = "/admin/customers">Search</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/new-customer">New</a></li>
             </ul>
           </li>
         </ul>
+
+        <!-- User info and logout button -->
+        <div class="d-flex" *ngIf="authService.isAuthenticated">
+          <span class="navbar-text me-3">
+            Welcome, {{ username }}
+          </span>
+          <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </nav>

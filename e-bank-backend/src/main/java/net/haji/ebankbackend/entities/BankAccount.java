@@ -19,6 +19,7 @@ public class BankAccount {
 
     private double balance;
     private Date createdAt;
+
     @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
