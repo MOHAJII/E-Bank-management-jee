@@ -1,6 +1,7 @@
 package net.haji.ebankbackend.web;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.haji.ebankbackend.dtos.*;
 import net.haji.ebankbackend.exceptions.BalanceNotSufficientException;
 import net.haji.ebankbackend.exceptions.BankAccountNotFoundException;
@@ -12,11 +13,12 @@ import java.util.List;
 @RestController
 @CrossOrigin("*")
 @AllArgsConstructor
+@Slf4j
 public class BankAccountRestController {
     private BankAccountService bankAccountService;
 
     @GetMapping("/accounts")
-    public List<BankAccountDTO> lisBankAccounts() {
+    public List<BankAccountDTO> listBankAccounts() {
         return bankAccountService.bankAccountList();
     }
 
@@ -35,18 +37,26 @@ public class BankAccountRestController {
 
     @PostMapping("/accounts/debit")
     public DebitDTO debit(@RequestBody DebitDTO debitDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
+        log.info("Debit operation for account: {}", debitDTO.getAccountId());
         bankAccountService.debit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
         return debitDTO;
     }
 
     @PostMapping("/accounts/credit")
-    public DebitDTO credit(@RequestBody DebitDTO debitDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
-        bankAccountService.credit(debitDTO.getAccountId(), debitDTO.getAmount(), debitDTO.getDescription());
-        return debitDTO;
+    public CreditDTO credit(@RequestBody CreditDTO creditDTO) throws BankAccountNotFoundException {
+        log.info("Credit operation for account: {}", creditDTO.getAccountId());
+        bankAccountService.credit(creditDTO.getAccountId(), creditDTO.getAmount(), creditDTO.getDescription());
+        return creditDTO;
     }
 
     @PostMapping("/accounts/transfer")
     public void transfer(@RequestBody TransferRequestDTO transferRequestDTO) throws BankAccountNotFoundException, BalanceNotSufficientException {
-        bankAccountService.transfer(transferRequestDTO.getAccountIdSource(), transferRequestDTO.getAccountIdDestination(), transferRequestDTO.getAmount());
+        log.info("Transfer operation from account: {} to account: {}", 
+                transferRequestDTO.getAccountIdSource(), 
+                transferRequestDTO.getAccountIdDestination());
+        bankAccountService.transfer(
+                transferRequestDTO.getAccountIdSource(), 
+                transferRequestDTO.getAccountIdDestination(), 
+                transferRequestDTO.getAmount());
     }
 }
