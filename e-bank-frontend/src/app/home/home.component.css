@@ -1,0 +1,19 @@
+/* Responsive chart container and card tweaks */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+canvas {
+  max-width: 100% !important;
+  height: 260px !important;
+}
+@media (max-width: 767px) {
+  .card-body {
+    padding: 1rem 0.5rem;
+  }
+  canvas {
+    height: 180px !important;
+  }
+}
+

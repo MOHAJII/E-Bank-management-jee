@@ -27,31 +27,4 @@
       </div>
     </div>
   </div>
-
-  <!-- Chart.js Example -->
-  <div class="row">
-    <div class="col-12">
-      <div class="card mb-3">
-        <div class="card-header">
-          Accounts by Type
-        </div>
-        <div class="card-body">
-          <canvas id="accountsChart"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
-
-<!--
-  In your home.component.ts:
-  - Inject CustomerService and AccountService.
-  - Fetch total customers, total accounts, and total balance.
-  - For the chart, fetch accounts grouped by type (e.g., savings, current).
-  - Use Chart.js to render the chart in ngAfterViewInit.
-  - Example methods to implement:
-    - getTotalCustomers()
-    - getTotalAccounts()
-    - getTotalBalance()
-    - getAccountsByType()
--->

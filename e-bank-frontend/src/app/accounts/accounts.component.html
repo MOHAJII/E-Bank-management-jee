@@ -7,11 +7,11 @@
       <div class="card-body">
         <form [formGroup]="accountsFormGroup" (submit)="handleSearch()">
           <div class="mb-2 input-group">
-            <label class="input-group-text">Name : </label>
+            <label class="input-group-text">Account ID : </label>
             <input type="text" class="form-control" formControlName="accountId">
             <button [disabled]="!accountsFormGroup.valid" class="btn btn-outline-info mx-auto" type="submit">
               Search
-              <i class="bi bi-save"></i>
+              <i class="bi bi-search"></i>
             </button>
           </div>
         </form>
@@ -52,12 +52,14 @@
         }
       </div>
     </div>
-    <ul class="nav nav-pills mt-3">
-      <li *ngFor="let item of [].constructor(accountDetails.totalPages); let page=index" class="ms-1">
-        <a [ngClass]="page == currentPage ? 'btn-info text-black' : 'btn-outline-info' " (click)="goToPage(page)"
-           class="btn btn-outline-info">{{ page + 1 }}</a>
-      </li>
-    </ul>
+    @if (accountDetails && accountDetails.totalPages > 0) {
+      <ul class="nav nav-pills mt-3">
+        <li *ngFor="let item of [].constructor(accountDetails.totalPages); let page=index" class="ms-1">
+          <a [ngClass]="page == currentPage ? 'btn-info text-black' : 'btn-outline-info' " (click)="goToPage(page)"
+             class="btn btn-outline-info">{{ page + 1 }}</a>
+        </li>
+      </ul>
+    }
   </div>
 
   @if (accountDetails) {
@@ -99,12 +101,9 @@
                 Save
               </button>
             </div>
-
-
           </form>
         </div>
       </div>
     </div>
   }
 </div>
-

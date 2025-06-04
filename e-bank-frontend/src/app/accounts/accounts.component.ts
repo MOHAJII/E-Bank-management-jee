@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AccountsService} from '../services/accounts.service';
 import {AccountDetails} from '../models/account.model';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {AsyncPipe, DatePipe, DecimalPipe, JsonPipe, NgClass, NgForOf} from '@angular/common';
+import {DatePipe, DecimalPipe, NgClass, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-accounts',
@@ -37,9 +37,20 @@ export class AccountsComponent implements OnInit{
 
       this.operationFormGroup = this.fb.group({
         operationType : this.fb.control("", [Validators.required]),
-        accountDestination : this.fb.control(null, [Validators.minLength(8)]),
+        accountDestination : this.fb.control(null),
         amount : this.fb.control("", [Validators.required]),
         description : this.fb.control("", [Validators.required]),
+      });
+
+      // Update validation for accountDestination based on operationType
+      this.operationFormGroup.get('operationType')?.valueChanges.subscribe(type => {
+        const accountDestinationControl = this.operationFormGroup.get('accountDestination');
+        if (type === 'TRANSFER') {
+          accountDestinationControl?.setValidators([Validators.required, Validators.minLength(8)]);
+        } else {
+          accountDestinationControl?.clearValidators();
+        }
+        accountDestinationControl?.updateValueAndValidity();
       })
     }
 
